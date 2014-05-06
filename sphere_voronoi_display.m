@@ -1,4 +1,4 @@
-function sphere_voronoi_ ( )
+function sphere_voronoi_display ( )
 
 %*****************************************************************************80
 %
@@ -56,19 +56,13 @@ function sphere_voronoi_ ( )
     end
 
 %
-%   Compute the Delaunay triangulation.
+%   Compute the Delaunay triangulation, Voronoi vertex, and Voronoi polygons.
 %
     [ face_num, face ] = sphere_delaunay ( n, d_xyz );
-%
-%   For each Delaunay triangle, compute the normal vector, to get the
-%   Voronoi vertex.
-%
     v_xyz = voronoi_vertices ( n, d_xyz, face_num, face );
-%
-%   Compute the Voronoi vertex lists that define the Voronoi polygons.
-%
     [ first, list ] = voronoi_polygons ( n, face_num, face );
     list_num = 2 * face_num;
+
 %
 %   Plot the polygons.
 %
