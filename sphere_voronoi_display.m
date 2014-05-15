@@ -59,10 +59,18 @@ function sphere_voronoi_display ( n )
 %
 %   Retrieve Data
 %
-    raw_data = importdata( fullfile( 
-        "mdv", strcat("grassc.3.1.", int2str(n), ".txt") );
+    raw_data = importdata( fullfile( ...
+        'mdv', strcat('grassc.3.1.', int2str(n), '.txt') ) );
     d_xyz = reshape( raw_data, 3, n );
-
+%
+%   Normalize Data
+%
+%     [dim_num,n] = size(d_xyz);
+%     for j = 1 : n
+%         norm = sqrt ( sum ( d_xyz(1:dim_num,j).^2 ) );
+%         d_xyz(1:dim_num,j) = d_xyz(1:dim_num,j) / norm;
+%     end
+    
 %
 %   Compute the Delaunay triangulation, Voronoi vertex, and Voronoi polygons.
 %
