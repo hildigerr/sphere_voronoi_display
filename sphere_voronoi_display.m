@@ -1,4 +1,4 @@
-function sphere_voronoi_display ( )
+function sphere_voronoi_display ( n )
 
 %*****************************************************************************80
 %
@@ -17,43 +17,51 @@ function sphere_voronoi_display ( )
 %    Roberto Vergaray -- adapted from sphere_voroni_test02 by John Burkardt
 %
 
-    fprintf ( 1, '\nSPHERE_VORONOI\n' );
+%     fprintf ( 1, '\nSPHERE_VORONOI\n' );
+%
+% %
+% %   Aquire Ponts
+% %
+%     d_xyz = input('Enter a set of xyz-points: '  );
+%     if( isempty(d_xyz) )
+%         n = input('Enter the quantity of points to randomy generate\n (default is 50): ');
+%         if( isempty(n) ) %TODO: assert non-negative
+%             n = 50
+%         end
+%         seed = 123456789;
+%         [ d_xyz, seed ] = uniform_on_sphere01_map ( 3, n, seed );
+%     else
+%         [dim_num,n] = size(d_xyz);
+%         %TODO: assert dim_num = 3;
+%         if( eq(dim_num,3) )
+%
+%             for j = 1 : n
+%                 norm = sqrt ( sum ( d_xyz(1:dim_num,j).^2 ) );
+%                 d_xyz(1:dim_num,j) = d_xyz(1:dim_num,j) / norm;
+%             end
+%         else
+%             d_xyz = transpose(d_xyz);
+%             [dim_num,n] = size(d_xyz);
+%             if( eq(dim_num,3) )
+%
+%                 for j = 1 : n
+%                     norm = sqrt ( sum ( d_xyz(1:dim_num,j).^2 ) );
+%                     d_xyz(1:dim_num,j) = d_xyz(1:dim_num,j) / norm;
+%                 end
+%             else
+%                 fprintf ( 1, '\nERROR\n' );
+%                 return
+%             end
+%         end
+%     end
+
 
 %
-%   Aquire Ponts
+%   Retrieve Data
 %
-    d_xyz = input('Enter a set of xyz-points: '  );
-    if( isempty(d_xyz) )
-        n = input('Enter the quantity of points to randomy generate\n (default is 50): ');
-        if( isempty(n) ) %TODO: assert non-negative
-            n = 50
-        end
-        seed = 123456789;
-        [ d_xyz, seed ] = uniform_on_sphere01_map ( 3, n, seed );
-    else
-        [dim_num,n] = size(d_xyz);
-        %TODO: assert dim_num = 3;
-        if( eq(dim_num,3) )
-
-            for j = 1 : n
-                norm = sqrt ( sum ( d_xyz(1:dim_num,j).^2 ) );
-                d_xyz(1:dim_num,j) = d_xyz(1:dim_num,j) / norm;
-            end
-        else
-            d_xyz = transpose(d_xyz);
-            [dim_num,n] = size(d_xyz);
-            if( eq(dim_num,3) )
-
-                for j = 1 : n
-                    norm = sqrt ( sum ( d_xyz(1:dim_num,j).^2 ) );
-                    d_xyz(1:dim_num,j) = d_xyz(1:dim_num,j) / norm;
-                end
-            else
-                fprintf ( 1, '\nERROR\n' );
-                return
-            end
-        end
-    end
+    raw_data = importdata( fullfile( 
+        "mdv", strcat("grassc.3.1.", int2str(n), ".txt") );
+    d_xyz = reshape( raw_data, 3, n );
 
 %
 %   Compute the Delaunay triangulation, Voronoi vertex, and Voronoi polygons.
