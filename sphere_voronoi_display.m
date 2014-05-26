@@ -82,6 +82,7 @@ function sphere_voronoi_display ( n )
 %
 %   Plot the polygons.
 %
+    figure(1);
     clf
     hold on
 
@@ -102,6 +103,26 @@ function sphere_voronoi_display ( n )
     zlabel ( '-- Z --' );
     title ( 'Figure 1: Voronoi polygons using PATCH' );
     hold off
-
+    
+    figure(2);
+    hold on
+    trisurf(convhull(transpose(v_xyz)), transpose(v_xyz(1,:)), transpose(v_xyz(2,:)), transpose(v_xyz(3,:)));
+    axis equal
+    xlabel ( '-- X --' );
+    ylabel ( '-- Y --' );
+    zlabel ( '-- Z --' );
+    title ( 'Figure 2: Convex Hull of Voronoi polygons -- SURFACE' );
+    hold off
+    
+    figure(3);
+    hold on
+    trimesh(convhull(transpose(v_xyz)), transpose(v_xyz(1,:)), transpose(v_xyz(2,:)), transpose(v_xyz(3,:)));
+    axis equal
+    xlabel ( '-- X --' );
+    ylabel ( '-- Y --' );
+    zlabel ( '-- Z --' );
+    title ( 'Figure 3: Convex Hull of Voronoi polygons -- MESH' );
+    hold off
+    
     return
 end
