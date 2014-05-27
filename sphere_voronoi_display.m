@@ -10,7 +10,7 @@ function sphere_voronoi_display ( n )
 %
 %  Modified:
 %
-%    05 May 2014
+%    May 2014
 %
 %  Author:
 %
@@ -60,7 +60,7 @@ function sphere_voronoi_display ( n )
 %   Retrieve Data
 %
     raw_data = importdata( fullfile( ...
-        'mdv', strcat('grassc.3.1.', int2str(n), '.txt') ) );
+        'mdv', strcat('pack.3.', int2str(n), '.txt') ) );
     d_xyz = reshape( raw_data, 3, n );
 %
 %   Normalize Data
@@ -70,7 +70,7 @@ function sphere_voronoi_display ( n )
 %         norm = sqrt ( sum ( d_xyz(1:dim_num,j).^2 ) );
 %         d_xyz(1:dim_num,j) = d_xyz(1:dim_num,j) / norm;
 %     end
-    
+
 %
 %   Compute the Delaunay triangulation, Voronoi vertex, and Voronoi polygons.
 %
@@ -103,7 +103,7 @@ function sphere_voronoi_display ( n )
     zlabel ( '-- Z --' );
     title ( 'Figure 1: Voronoi polygons using PATCH' );
     hold off
-    
+
     figure(2);
     hold on
     trisurf(convhull(transpose(v_xyz)), transpose(v_xyz(1,:)), transpose(v_xyz(2,:)), transpose(v_xyz(3,:)));
@@ -113,7 +113,7 @@ function sphere_voronoi_display ( n )
     zlabel ( '-- Z --' );
     title ( 'Figure 2: Convex Hull of Voronoi polygons -- SURFACE' );
     hold off
-    
+
 %     figure(3);
 %     hold on
 %     trimesh(convhull(transpose(v_xyz)), transpose(v_xyz(1,:)), transpose(v_xyz(2,:)), transpose(v_xyz(3,:)));
@@ -123,7 +123,7 @@ function sphere_voronoi_display ( n )
 %     zlabel ( '-- Z --' );
 %     title ( 'Figure 3: Convex Hull of Voronoi polygons -- MESH' );
 %     hold off
-    
+
     figure(4);
     hold on
     trisurf(convhull(transpose(d_xyz)), transpose(d_xyz(1,:)), transpose(d_xyz(2,:)), transpose(d_xyz(3,:)));
@@ -133,7 +133,7 @@ function sphere_voronoi_display ( n )
     zlabel ( '-- Z --' );
     title ( 'Figure 4: Convex Hull of MDV points -- SURFACE' );
     hold off
-    
+
 %     figure(5);
 %     hold on
 %     trimesh(convhull(transpose(d_xyz)), transpose(d_xyz(1,:)), transpose(d_xyz(2,:)), transpose(d_xyz(3,:)));
@@ -143,6 +143,6 @@ function sphere_voronoi_display ( n )
 %     zlabel ( '-- Z --' );
 %     title ( 'Figure 5: Convex Hull of MDV points -- MESH' );
 %     hold off
-    
+
     return
 end
