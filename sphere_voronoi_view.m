@@ -8,7 +8,7 @@ end
 
 fprintf('\nWhat color would you like the lines to be?\n');
 fprintf('\t1) Red (default) \n\t2) Black\n');
-c = input('>');
+c = input('>> ');
 if( isempty(c) ||( c == 1 ))
     c = 'r';
 else
@@ -32,7 +32,7 @@ else
     fprintf('\nWhat color would you like the penetrating lines to be?');
     fprintf('\n\t1) Red (default) \n\t2) Blue \n\t3) Green ');
     fprintf('\n\t4) Black \n\t5) Yellow ');
-    s = input('\n>');
+    s = input('\n>> ');
     if isempty( s )
         s = 1;
     end
