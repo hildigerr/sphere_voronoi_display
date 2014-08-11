@@ -1,4 +1,4 @@
-function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, pvect_d )
+function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist, qSpec )
 
 %*****************************************************************************80
 %
@@ -16,17 +16,19 @@ function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, pvect_d
 %
 %    Roberto Vergaray -- adapted from sphere_voroni_test02 by John Burkardt
 %
-if nargin < 7
-    pvect_d = 1.0;
-end
-if nargin < 6
-end
+
+% if nargin < 8
+% end
+% if nargin < 7
+% end
+% if nargin < 6
+% end
 if nargin < 5
     pointSpec = 'r*';
 end
 if nargin < 4
    alph = 0.9;
-end 
+end
 if nargin < 3
    wid = 2.0;
 end
@@ -95,7 +97,7 @@ end
     v_xyz = voronoi_vertices ( n, d_xyz, face_num, face );
     [ first, list ] = voronoi_polygons ( n, face_num, face );
     list_num = 2 * face_num;
-    
+
 %
 %   Plot the polygons.
 %
@@ -118,12 +120,16 @@ end
         end
     else
         for i = 1 : n
-            %plot3 ( [0,d_xyz(1,i)], [0,d_xyz(2,i)], [0,d_xyz(3,i)], pointSpec, 'LineWidth', widv );
-            %plot3 ( [0,d_xyz(1,i)*pvect_d], [0,d_xyz(2,i)*pvect_d], [0,d_xyz(3,i)*pvect_d], pointSpec, 'LineWidth', widv );
-            plot3 ( [0,d_xyz(1,i)]*pvect_d, [0,d_xyz(2,i)]*pvect_d, [0,d_xyz(3,i)]*pvect_d, pointSpec, 'LineWidth', widv );
+            plot3 ( [0,d_xyz(1,i)], [0,d_xyz(2,i)], [0,d_xyz(3,i)], pointSpec, 'LineWidth', widv );
         end
     end
-    
+
+     if nargin > 7
+        for i = 1 : n
+            plot3 ( [0,d_xyz(1,i)]*qDist, [0,d_xyz(2,i)]*qDist, [0,d_xyz(3,i)]*qDist, qSpec );
+        end
+     end
+     
     axis equal
     xlabel ( '-- X --' );
     ylabel ( '-- Y --' );
