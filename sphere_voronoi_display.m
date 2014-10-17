@@ -1,4 +1,4 @@
-function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist, qSpec )
+function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist )
 
 %*****************************************************************************80
 %
@@ -10,19 +10,13 @@ function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist, 
 %
 %  Modified:
 %
-%    Jun 2014
+%    Oct 2014
 %
 %  Author:
 %
 %    Roberto Vergaray -- adapted from sphere_voroni_test02 by John Burkardt
 %
 
-% if nargin < 8
-% end
-% if nargin < 7
-% end
-% if nargin < 6
-% end
 if nargin < 5
     pointSpec = 'r*';
 end
@@ -81,14 +75,6 @@ end
     raw_data = importdata( fullfile( ...
         'mdv', strcat('pack.3.', int2str(n), '.txt') ) );
     d_xyz = reshape( raw_data, 3, n );
-%
-%   Normalize Data
-%
-%     [dim_num,n] = size(d_xyz);
-%     for j = 1 : n
-%         norm = sqrt ( sum ( d_xyz(1:dim_num,j).^2 ) );
-%         d_xyz(1:dim_num,j) = d_xyz(1:dim_num,j) / norm;
-%     end
 
 %
 %   Compute the Delaunay triangulation, Voronoi vertex, and Voronoi polygons.
@@ -114,22 +100,12 @@ end
             'EdgeColor', eColor, 'LineWidth', wid, 'FaceAlpha', alph );
     end
 
-    if nargin < 6
+    if nargin > 5
         for i = 1 : n
-            plot3 ( [0,d_xyz(1,i)], [0,d_xyz(2,i)], [0,d_xyz(3,i)], pointSpec );
-        end
-    else
-        for i = 1 : n
-            plot3 ( [0,d_xyz(1,i)], [0,d_xyz(2,i)], [0,d_xyz(3,i)], pointSpec, 'LineWidth', widv );
+            plot3 ( [0,d_xyz(1,i)]*qDist, [0,d_xyz(2,i)]*qDist, [0,d_xyz(3,i)]*qDist, pointSpec, 'LineWidth', widv );
         end
     end
 
-     if nargin > 7
-        for i = 1 : n
-            plot3 ( [0,d_xyz(1,i)]*qDist, [0,d_xyz(2,i)]*qDist, [0,d_xyz(3,i)]*qDist, qSpec );
-        end
-     end
-     
     axis equal
     xlabel ( '-- X --' );
     ylabel ( '-- Y --' );
