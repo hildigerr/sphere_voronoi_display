@@ -91,28 +91,29 @@ end
     clf
     hold on
 
-    for i = 1 : 1%n
+    for i = 1 : n
         n1 = first(i);
         n2 = first(i+1) - 1;
         j = list(n1:n2);
         j = [ j; list(n1) ];
-       h(i) = patch (  [v_xyz(1,j),d_xyz(1,i)*qDist], ...
-                       [v_xyz(2,j),d_xyz(2,i)*qDist], ...
-                       [v_xyz(3,j),d_xyz(3,i)*qDist], ...
+        h(i) = patch ( v_xyz(1,j), ...
+                       v_xyz(2,j), ...
+                       v_xyz(3,j), ...
                        'blue', 'EdgeColor', eColor, 'LineWidth', wid, 'FaceAlpha', alph );
-%       vqt = size(j)
-%        for t = 1 : vqt
-%            plot3( [v_xyz(1,j),d_xyz(1,i)*qDist], ...
-%                   [v_xyz(2,j),d_xyz(2,i)*qDist], ...
-%                   [v_xyz(3,j),d_xyz(3,i)*qDist] )
-%        end
+        
+        if nargin > 5
+            vqt = size(j);
+            for t = 1 : vqt
+               plot3( [v_xyz(1,j(t)),d_xyz(1,i)*qDist], ...
+                      [v_xyz(2,j(t)),d_xyz(2,i)*qDist], ...
+                      [v_xyz(3,j(t)),d_xyz(3,i)*qDist], ...
+                      pointSpec, 'LineWidth', widv );
+            end
+        end
     end
-
-    
-    
-    
+   
     if nargin > 5
-        for i = 1 : 1%n
+        for i = 1 : n
             plot3 ( [0,d_xyz(1,i)]*qDist, [0,d_xyz(2,i)]*qDist, [0,d_xyz(3,i)]*qDist, pointSpec, 'LineWidth', widv );
         end
     end
