@@ -1,4 +1,4 @@
-function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist )
+function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist, pointSpec2, widv2 )
 
 %*****************************************************************************80
 %
@@ -100,18 +100,18 @@ end
                        v_xyz(2,j), ...
                        v_xyz(3,j), ...
                        'blue', 'EdgeColor', eColor, 'LineWidth', wid, 'FaceAlpha', alph );
-        
-        if nargin > 5
+
+        if nargin > 8
             vqt = size(j);
             for t = 1 : vqt
                plot3( [v_xyz(1,j(t)),d_xyz(1,i)*qDist], ...
                       [v_xyz(2,j(t)),d_xyz(2,i)*qDist], ...
                       [v_xyz(3,j(t)),d_xyz(3,i)*qDist], ...
-                      pointSpec, 'LineWidth', widv );
+                      pointSpec2, 'LineWidth', widv2 );
             end
         end
     end
-   
+
     if nargin > 5
         for i = 1 : n
             plot3 ( [0,d_xyz(1,i)]*qDist, [0,d_xyz(2,i)]*qDist, [0,d_xyz(3,i)]*qDist, pointSpec, 'LineWidth', widv );
