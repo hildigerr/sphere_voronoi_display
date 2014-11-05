@@ -159,7 +159,43 @@ function sphere_voronoi_view
                 otherwise
                     z = 'y';
             end
-            sphere_voronoi_display(n,c,w,a,s,x,q,z,y);
+
+            t =  input('\nWould you like to view the spanning lines [y/n]? ', 's');
+            if(( isempty(t) )||( t == 'n' )||( t == 'N' ))
+              sphere_voronoi_display(n,c,w,a,s,x,q,z,y);
+            else
+               spLnQt = input('\nHow many spanning lines do you want per pair of verticies [2, 20]? (Default 2): ');
+               if(( isempty(spLnQt) )||( spLnQt < 0 )||( spLnQt > 4.0 ))
+                 spLnQt = 2.0;
+               end
+
+               fprintf('\nWhat color would you like the spanning lines to be?');
+               fprintf('\n\t1) Red \n\t2) Blue \n\t3) Green (default) ');
+               fprintf('\n\t4) Black \n\t5) Yellow ');
+               t = input('\n>> ');
+               if isempty( t )
+                t = 3;
+               end
+               yy = input('\nHow wide do you want the spanning lines to be [0.1, 4.0]? (Default 2.0): ');
+               if(( isempty(yy) )||( yy < 0 )||( yy > 4.0 ))
+                 yy = 2.0;
+               end
+               switch t
+                case 1
+                    t = 'r';
+                case 2
+                    t = 'b';
+                case 3
+                    t = 'g';
+                case 4
+                    t = 'k';
+                case 5
+                    t = 'y';
+                otherwise
+                    t = 'g';
+               end
+               sphere_voronoi_display(n,c,w,a,s,x,q,z,y,spLnQt,t,yy);
+            end
         end
 
     end % else we already called _dispaly, so were done.

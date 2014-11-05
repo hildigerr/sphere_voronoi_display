@@ -1,4 +1,4 @@
-function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist, pointSpec2, widv2 )
+function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist, pointSpec1, widv1, kqt, pointSpec2, widv2 )
 
 %*****************************************************************************80
 %
@@ -101,7 +101,7 @@ end
                        v_xyz(3,j), ...
                        'blue', 'EdgeColor', eColor, 'LineWidth', wid, 'FaceAlpha', alph );
 %
-%       Plot the Radial Lines, and Spanning Lines
+%       Plot the Radial Lines
 %
         if nargin > 8
             vqt = size(j);
@@ -109,13 +109,15 @@ end
                plot3( [v_xyz(1,j(t)),d_xyz(1,i)*qDist], ...
                       [v_xyz(2,j(t)),d_xyz(2,i)*qDist], ...
                       [v_xyz(3,j(t)),d_xyz(3,i)*qDist], ...
-                      pointSpec2, 'LineWidth', widv2 );
+                      pointSpec1, 'LineWidth', widv1 );
             end
+        end
+
 %
 %           plot spanning lines
 %
-            kqt = 4; %for testing
-            ix = 2; %for testing
+        if nargin > 10
+          for ix = 1 : kqt
             for ta = 1 : vqt
                 tb = mod(ta+1,vqt);
                 tb = tb(1);
@@ -126,8 +128,9 @@ end
                     [d_xyz(1,i)*qDist + ix/kqt*(v_xyz(1,j(ta))-d_xyz(1,i)*qDist), d_xyz(1,i)*qDist + ix/kqt*(v_xyz(1,j(tb))-d_xyz(1,i)*qDist)],...
                     [d_xyz(2,i)*qDist + ix/kqt*(v_xyz(2,j(ta))-d_xyz(2,i)*qDist), d_xyz(2,i)*qDist + ix/kqt*(v_xyz(2,j(tb))-d_xyz(2,i)*qDist)],...
                     [d_xyz(3,i)*qDist + ix/kqt*(v_xyz(3,j(ta))-d_xyz(3,i)*qDist), d_xyz(3,i)*qDist + ix/kqt*(v_xyz(3,j(tb))-d_xyz(3,i)*qDist)],...
-                    pointSpec, 'LineWidth', widv2 );
+                    pointSpec2, 'LineWidth', widv2 );
             end
+          end
         end
     end
 
