@@ -133,11 +133,11 @@ function sphere_voronoi_view
             sphere_voronoi_display(n,c,w,a,s,x,q);
         else
             fprintf('\nWhat color would you like the radial lines to be?');
-            fprintf('\n\t1) Red \n\t2) Blue (default) \n\t3) Green ');
-            fprintf('\n\t4) Black \n\t5) Yellow ');
+            fprintf('\n\t1) Red \n\t2) Blue \n\t3) Green ');
+            fprintf('\n\t4) Black \n\t5) Yellow (default) ');
             z = input('\n>> ');
             if isempty( z )
-                z = 2;
+                z = 5;
             end
 
             y = input('\nHow wide do you want the radial lines to be [0.1, 4.0]? (Default 2.0): ');
@@ -157,7 +157,7 @@ function sphere_voronoi_view
                 case 5
                     z = 'y';
                 otherwise
-                    z = 'b';
+                    z = 'y';
             end
             sphere_voronoi_display(n,c,w,a,s,x,q,z,y);
         end

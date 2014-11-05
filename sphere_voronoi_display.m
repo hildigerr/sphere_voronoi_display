@@ -100,7 +100,9 @@ end
                        v_xyz(2,j), ...
                        v_xyz(3,j), ...
                        'blue', 'EdgeColor', eColor, 'LineWidth', wid, 'FaceAlpha', alph );
-
+%
+%       Plot the Radial Lines, and Spanning Lines
+%
         if nargin > 8
             vqt = size(j);
             for t = 1 : vqt
@@ -109,9 +111,29 @@ end
                       [v_xyz(3,j(t)),d_xyz(3,i)*qDist], ...
                       pointSpec2, 'LineWidth', widv2 );
             end
+%
+%           plot spanning lines
+%
+            kqt = 4; %for testing
+            ix = 2; %for testing
+            for ta = 1 : vqt
+                tb = mod(ta+1,vqt);
+                tb = tb(1);
+                if tb == 0
+                  tb = 1;
+                end
+                plot3( ...
+                    [d_xyz(1,i)*qDist + ix/kqt*(v_xyz(1,j(ta))-d_xyz(1,i)*qDist), d_xyz(1,i)*qDist + ix/kqt*(v_xyz(1,j(tb))-d_xyz(1,i)*qDist)],...
+                    [d_xyz(2,i)*qDist + ix/kqt*(v_xyz(2,j(ta))-d_xyz(2,i)*qDist), d_xyz(2,i)*qDist + ix/kqt*(v_xyz(2,j(tb))-d_xyz(2,i)*qDist)],...
+                    [d_xyz(3,i)*qDist + ix/kqt*(v_xyz(3,j(ta))-d_xyz(3,i)*qDist), d_xyz(3,i)*qDist + ix/kqt*(v_xyz(3,j(tb))-d_xyz(3,i)*qDist)],...
+                    pointSpec, 'LineWidth', widv2 );
+            end
         end
     end
 
+%
+%   Plot the Penetrating Lines
+%
     if nargin > 5
         for i = 1 : n
             plot3 ( [0,d_xyz(1,i)]*qDist, [0,d_xyz(2,i)]*qDist, [0,d_xyz(3,i)]*qDist, pointSpec, 'LineWidth', widv );
