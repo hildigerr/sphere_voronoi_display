@@ -117,25 +117,25 @@ end
 %           plot spanning lines
 %
         if nargin > 10
-          for ix = 1 : kqt
             for ta = 1 : vqt
                 tb = mod(ta+1,vqt);
                 tb = tb(1);
                 if tb == 0
                   tb = 1;
                 end
-                plot3( ...
-                    [d_xyz(1,i)*qDist + ix/kqt*(v_xyz(1,j(ta))-d_xyz(1,i)*qDist), d_xyz(1,i)*qDist + ix/kqt*(v_xyz(1,j(tb))-d_xyz(1,i)*qDist)],...
-                    [d_xyz(2,i)*qDist + ix/kqt*(v_xyz(2,j(ta))-d_xyz(2,i)*qDist), d_xyz(2,i)*qDist + ix/kqt*(v_xyz(2,j(tb))-d_xyz(2,i)*qDist)],...
-                    [d_xyz(3,i)*qDist + ix/kqt*(v_xyz(3,j(ta))-d_xyz(3,i)*qDist), d_xyz(3,i)*qDist + ix/kqt*(v_xyz(3,j(tb))-d_xyz(3,i)*qDist)],...
-                    pointSpec2, 'LineWidth', widv2 );
+                for ix = 1 : kqt
+                    plot3( ...
+                        [d_xyz(1,i)*qDist + ix/kqt*(v_xyz(1,j(ta))-d_xyz(1,i)*qDist), d_xyz(1,i)*qDist + ix/kqt*(v_xyz(1,j(tb))-d_xyz(1,i)*qDist)],...
+                        [d_xyz(2,i)*qDist + ix/kqt*(v_xyz(2,j(ta))-d_xyz(2,i)*qDist), d_xyz(2,i)*qDist + ix/kqt*(v_xyz(2,j(tb))-d_xyz(2,i)*qDist)],...
+                        [d_xyz(3,i)*qDist + ix/kqt*(v_xyz(3,j(ta))-d_xyz(3,i)*qDist), d_xyz(3,i)*qDist + ix/kqt*(v_xyz(3,j(tb))-d_xyz(3,i)*qDist)],...
+                        pointSpec2, 'LineWidth', widv2 );
             end
           end
         end
     end
 
 %
-%   Plot the Penetrating Lines
+%   Plot the Stem Lines
 %
     if nargin > 5
         for i = 1 : n
@@ -143,11 +143,12 @@ end
         end
     end
 
-    axis equal
-    xlabel ( '-- X --' );
-    ylabel ( '-- Y --' );
-    zlabel ( '-- Z --' );
-    title ( 'Figure 1: Voronoi polygons using PATCH' );
+
+    axis off %was: equal
+%     xlabel ( '-- X --' );
+%     ylabel ( '-- Y --' );
+%     zlabel ( '-- Z --' );
+%     title ( 'Figure 1: Voronoi polygons using PATCH' );
     hold off
 
 %     figure(2);

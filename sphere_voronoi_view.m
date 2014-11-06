@@ -28,17 +28,17 @@ function sphere_voronoi_view
         a = 0.4;
     end
 
-    s = input('\nWould you like to view the penetrating lines [y/n]? ', 's');
+    s = input('\nWould you like to view the stem lines [y/n]? ', 's');
     if(( isempty(s) )||( s == 'n' )||( s == 'N' ))
         s = 'r';
         sphere_voronoi_display(n,c,w,a,s);
     else
-        fprintf('\nWhat color would you like the penetrating lines to be?');
+        fprintf('\nWhat color would you like the stem lines to be?');
         fprintf('\n\t1) Red \n\t2) Blue \n\t3) Green ');
-        fprintf('\n\t4) Black (default) \n\t5) Yellow ');
+        fprintf('\n\t4) Black \n\t5) Yellow (default) ');
         s = input('\n>> ');
         if isempty( s )
-            s = 4;
+            s = 5;
         end
 
         q = input('\nHow far from the origin would you like the lines to extend ? (Default 0.50): ');
@@ -46,9 +46,9 @@ function sphere_voronoi_view
             q = 0.50;
         end
 
-        x = input('\nHow wide do you want the lines to be [0.1, 4.0]? (Default 2.0): ');
+        x = input('\nHow wide do you want the lines to be [0.1, 4.0]? (Default 1.0): ');
         if(( isempty(x) )||( x < 0 )||( x > 4.0 ))
-            x = 2.0;
+            x = 1.0;
         end
 
         fprintf('\nWhat symbol would you like to use for the Marker Specifier?');
@@ -125,7 +125,7 @@ function sphere_voronoi_view
                 % Keep this redundant with default for easy modification.
                 %   in other words, don't try to be slick by eliminating
                 %   an unnecessary case above, or you'll be sorry eventually.
-                s = '-ko';
+                s = '-yo';
         end
 
         z = input('\nWould you like to view the radial lines [y/n]? ', 's');
@@ -133,16 +133,16 @@ function sphere_voronoi_view
             sphere_voronoi_display(n,c,w,a,s,x,q);
         else
             fprintf('\nWhat color would you like the radial lines to be?');
-            fprintf('\n\t1) Red \n\t2) Blue \n\t3) Green ');
-            fprintf('\n\t4) Black \n\t5) Yellow (default) ');
+            fprintf('\n\t1) Red \n\t2) Blue (default) \n\t3) Green ');
+            fprintf('\n\t4) Black \n\t5) Yellow ');
             z = input('\n>> ');
             if isempty( z )
-                z = 5;
+                z = 2;
             end
 
-            y = input('\nHow wide do you want the radial lines to be [0.1, 4.0]? (Default 2.0): ');
+            y = input('\nHow wide do you want the radial lines to be [0.1, 4.0]? (Default 1.0): ');
             if(( isempty(y) )||( y < 0 )||( y > 4.0 ))
-                y = 2.0;
+                y = 1.0;
             end
 
             switch z
@@ -157,28 +157,28 @@ function sphere_voronoi_view
                 case 5
                     z = 'y';
                 otherwise
-                    z = 'y';
+                    z = 'b';
             end
 
             t =  input('\nWould you like to view the spanning lines [y/n]? ', 's');
             if(( isempty(t) )||( t == 'n' )||( t == 'N' ))
               sphere_voronoi_display(n,c,w,a,s,x,q,z,y);
             else
-               spLnQt = input('\nHow many spanning lines do you want per pair of verticies [2, 20]? (Default 2): ');
-               if(( isempty(spLnQt) )||( spLnQt < 0 )||( spLnQt > 4.0 ))
-                 spLnQt = 2.0;
+               spLnQt = input('\nHow many spanning lines do you want per pair of vertices [2, 20]? (Default 2): ');
+               if(( isempty(spLnQt) )||( spLnQt < 2 )||( spLnQt > 20 ))
+                 spLnQt = 2;
                end
 
                fprintf('\nWhat color would you like the spanning lines to be?');
-               fprintf('\n\t1) Red \n\t2) Blue \n\t3) Green (default) ');
-               fprintf('\n\t4) Black \n\t5) Yellow ');
+               fprintf('\n\t1) Red \n\t2) Blue \n\t3) Green ');
+               fprintf('\n\t4) Black (default) \n\t5) Yellow ');
                t = input('\n>> ');
                if isempty( t )
-                t = 3;
+                t = 4;
                end
-               yy = input('\nHow wide do you want the spanning lines to be [0.1, 4.0]? (Default 2.0): ');
+               yy = input('\nHow wide do you want the spanning lines to be [0.1, 4.0]? (Default 0.5): ');
                if(( isempty(yy) )||( yy < 0 )||( yy > 4.0 ))
-                 yy = 2.0;
+                 yy = 0.5;
                end
                switch t
                 case 1
@@ -192,7 +192,7 @@ function sphere_voronoi_view
                 case 5
                     t = 'y';
                 otherwise
-                    t = 'g';
+                    t = 'b';
                end
                sphere_voronoi_display(n,c,w,a,s,x,q,z,y,spLnQt,t,yy);
             end
