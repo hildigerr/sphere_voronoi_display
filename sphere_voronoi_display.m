@@ -144,7 +144,7 @@ end
     end
 
 
-    axis off %was: equal
+    axis equal
 %     xlabel ( '-- X --' );
 %     ylabel ( '-- Y --' );
 %     zlabel ( '-- Z --' );
