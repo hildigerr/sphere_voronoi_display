@@ -1,4 +1,4 @@
-function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist, pointSpec1, widv1, kqt, pointSpec2, widv2 )
+function sphere_voronoi_display ( n, eColor, wid, alph, pointSpec, widv, qDist, pointSpec1, widv1, kqt, pointSpec2, widv2,filename )
 
 %*****************************************************************************80
 %
@@ -150,6 +150,10 @@ end
 %     zlabel ( '-- Z --' );
 %     title ( 'Figure 1: Voronoi polygons using PATCH' );
     hold off
+
+if nargin > 12 % have filename
+	print('-dpng','-r0',filename)
+end
 
 %     figure(2);
 %     hold on
