@@ -8,10 +8,6 @@ function sphere_voronoi_web ( n, eColor, wid, alph, pointSpec, widv, qDist, poin
 %
 %    This code is distributed under the GNU LGPL license.
 %
-%  Modified:
-%
-%    Oct 2014
-%
 %  Author:
 %
 %    Roberto Vergaray -- adapted from sphere_voroni_test02 by John Burkardt
@@ -31,20 +27,12 @@ if nargin < 2
 end
 
 
-% %
-% %   Retrieve Data
-% %
-%     raw_data = importdata( fullfile( ...
-%         'mdv', strcat('pack.3.', int2str(n), '.txt') ) );
-%     d_xyz = reshape( raw_data, 3, n );
-
 %
 %   Compute the Delaunay triangulation, Voronoi vertex, and Voronoi polygons.
 %
     [ face_num, face ] = sphere_delaunay ( n, d_xyz );
     v_xyz = voronoi_vertices ( n, d_xyz, face_num, face );
     [ first, list ] = voronoi_polygons ( n, face_num, face );
-    list_num = 2 * face_num;
 
 %
 %   Plot the polygons.
@@ -113,10 +101,12 @@ end
 %     title ( 'Figure 1: Voronoi polygons using PATCH' );
     hold off
 
-if nargin > 12 % have filename
-	%deployprint('-dpng','-r0',filename)
-    print('-dpng','-r0',filename)
-end
+    if nargin > 12 % have filename
+        if isdeployed
+            deployprint('-dpng','-r0',filename);
+        else
+            print('-dpng','-r0',filename);
+        end
+    end
 
-    return
 end
