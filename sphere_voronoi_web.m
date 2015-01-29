@@ -37,8 +37,9 @@ end
 %
 %   Plot the polygons.
 %
-    figure(1);
-    clf
+    img = figure;
+    set(img, 'Visible', 'off');
+    clf(img);
     hold on
 
     for i = 1 : n
@@ -101,12 +102,13 @@ end
 %     title ( 'Figure 1: Voronoi polygons using PATCH' );
     hold off
 
-    if nargin > 12 % have filename
-        if isdeployed
-            deployprint('-dpng','-r0',filename);
-        else
-            print('-dpng','-r0',filename);
-        end
-    end
+%     if nargin > 12 % have filename
+%         if isdeployed
+%             deployprint('-dpng','-r0',filename);
+%         else
+%             print('-dpng','-r0',filename);
+%         end
+%     end
+    saveas(img, filename, 'png');
 
 end
