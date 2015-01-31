@@ -8,8 +8,8 @@ exe_name=$0
 exe_dir=`dirname "$0"`
 # echo "------------------------------------------"
 if [ "x$1" = "x" ]; then
-#   echo Usage: > 
-#   echo    $0 \<deployedMCRroot\> args
+   echo Usage:
+   echo    $0 \<deployedMCRroot\> args
 else
 #   echo Setting up environment variables
   MCRROOT="$1"
