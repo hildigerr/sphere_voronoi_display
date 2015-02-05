@@ -1,1 +1,3 @@
-addpath src
+if ~isdeployed
+    addpath src
+end
